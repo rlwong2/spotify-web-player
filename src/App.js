@@ -42,12 +42,27 @@ class App extends Component {
   componentDidMount() {
     // Set token
     let _token = hash.access_token;
+
     if (_token) {
       // Set token
       this.setState({
         token: _token
       });
       this.getCurrentlyPlaying(_token);
+    }
+
+    // set interval for polling every 5 seconds
+    this.interval = setInterval(() => this.tick(), 5000);
+  }
+
+  componentWillUnmount() {
+    // clear the interval to save resources
+    clearInterval(this.interval);
+  }
+
+  tick() {
+    if(this.state.token) {
+      this.getCurrentlyPlaying(this.state.token);
     }
   }
 
