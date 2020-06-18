@@ -1,38 +1,54 @@
 /** Now Playing **/
 .now-playing__name {
-    font-size: 1.2em;
-    margin-bottom: 0.2em;
-  }
-  .now-playing__artist {
-    margin-bottom: 0.8em;
-    font-weight: 200;
-  }
-  .now-playing__status {
-    margin-bottom: 0.2em;
-    font-size: 2.5em;
-  }
-  .now-playing__img {
-    float: left;
-    margin-right: 10px;
-    text-align: right;
-    width: 45%;
-  }
-  .now-playing__img img {
-    max-width: 80vmin;
-    width: 100%;
-  }
-  .now-playing__side {
-    margin-left: 5%;
-    width: 45%;
-  }
-  /** Progress **/
-  .progress {
-    border: 1px solid #eee;
-    height: 6px;
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .progress__bar {
-    background-color: #eee;
-    height: 4px;
-  }
+  font-size: 1.2em;
+  margin-bottom: 0.2em;
+}
+.now-playing__artist {
+  margin-bottom: 0.8em;
+  font-weight: 200;
+}
+.now-playing__status {
+  margin-bottom: 0.8em;
+}
+.now-playing__img {
+  float: left;
+  margin-right: 10px;
+  text-align: right;
+  width: 45%;
+}
+.now-playing__img img {
+  max-width: 80vmin;
+  width: 100%;
+}
+.now-playing__side {
+  margin-left: 5%;
+  width: 45%;
+}
+/** Progress **/
+.progress {
+  border: 1px solid #eee;
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress__bar {
+  background-color: #eee;
+  height: 4px;
+}
+
+.action-buttons {
+  color:white;
+  font-size: 2.5em;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.action-buttons:hover {
+  color:#cccccc;
+  font-size: 2.6em;
+}
