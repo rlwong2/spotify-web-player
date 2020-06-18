@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import * as $ from "jquery";
 import Player from "./Components/Player";
 import "./App.css";
 import { authEndpoint, clientId, redirectUri, scopes } from "./config";
@@ -74,7 +73,7 @@ class App extends Component {
       }
     })
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         this.setState({
           item: res.data.item,
           is_playing: res.data.is_playing,

@@ -1,13 +1,15 @@
 /** Now Playing **/
 .now-playing__name {
-    font-size: 1.5em;
+    font-size: 1.2em;
     margin-bottom: 0.2em;
   }
   .now-playing__artist {
-    margin-bottom: 1em;
+    margin-bottom: 0.8em;
+    font-weight: 200;
   }
   .now-playing__status {
-    margin-bottom: 1em;
+    margin-bottom: 0.2em;
+    font-size: 2.5em;
   }
   .now-playing__img {
     float: left;

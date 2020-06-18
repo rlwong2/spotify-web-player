@@ -1,4 +1,6 @@
 import React from "react";
+import { MdPlayCircleFilled } from "react-icons/md"
+import { MdPauseCircleFilled } from "react-icons/md"
 import "./Player.css";
 
 const Player = props => {
@@ -22,7 +24,8 @@ const Player = props => {
             {props.item.artists[0].name}
           </div>
           <div className="now-playing__status">
-            {props.is_playing ? "Playing" : "Paused"}
+            {!props.is_playing && (<MdPauseCircleFilled color="#ffffff" />)}
+            {props.is_playing && (<MdPlayCircleFilled color="#ffffff" />)}
           </div>
           <div className="progress">
             <div
