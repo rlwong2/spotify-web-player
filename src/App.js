@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import * as $ from "jquery";
 import Player from "./Components/Player";
 import "./App.css";
 import { authEndpoint, clientId, redirectUri, scopes } from "./config";
+import axios from "axios";
 
 // Get the hash of the url
 const hash = window.location.hash
@@ -68,28 +68,28 @@ class App extends Component {
 
   getCurrentlyPlaying(token) {
     // Make a call using the token
-    $.ajax({
-      url: "https://api.spotify.com/v1/me/player",
-      type: "GET",
-      beforeSend: (xhr) => {
-        xhr.setRequestHeader("Authorization", "Bearer " + token);
-      },
-      success: (data) => {
-        console.log(data)
-        this.setState({
-          item: data.item,
-          is_playing: data.is_playing,
-          progress_ms: data.progress_ms,
-        });
+    axios.get("https://api.spotify.com/v1/me/player", {
+      headers: {
+        "Authorization": "Bearer " + token
       }
-    });
+    })
+      .then((res) => {
+        console.log(res)
+        this.setState({
+          item: res.data.item,
+          is_playing: res.data.is_playing,
+          progress_ms: res.data.progress_ms,
+        });
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         {!this.state.token && (
           <a
             className="btn btn--loginApp-link"
@@ -104,7 +104,7 @@ class App extends Component {
           <Player
             item={this.state.item}
             is_playing={this.state.is_playing}
-            progress_ms={this.progress_ms}
+            progress_ms={this.state.progress_ms}
           />
         )}
         </header>
