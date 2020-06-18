@@ -85,6 +85,11 @@ class App extends Component {
       })
   }
 
+  togglePlay(e) {
+    e.preventDefault();
+    
+  }
+
   render() {
     return (
       <div className="App">
@@ -104,6 +109,7 @@ class App extends Component {
             item={this.state.item}
             is_playing={this.state.is_playing}
             progress_ms={this.state.progress_ms}
+            togglePlay={this.togglePlay}
           />
         )}
         </header>
