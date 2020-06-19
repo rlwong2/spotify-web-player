@@ -88,6 +88,7 @@ body {
   background-position: center center;
   filter: blur(8em) opacity(0.6);
   position: absolute;
+  z-index: -1;
 }
 
 .main-wrapper {
@@ -110,4 +111,19 @@ body {
 
 .main-container {
   flex: 1;
+}
+
+svg {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 30px;
+}
+
+svg:hover {
+  border: 1px solid #ffffff;
+}
+
+svg:focus {
+  border: none;
 }

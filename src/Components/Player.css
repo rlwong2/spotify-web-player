@@ -23,6 +23,7 @@
 .now-playing__side {
   margin-left: 5%;
   width: 45%;
+  min-width: 400px;
 }
 /** Progress **/
 .progress {
@@ -30,6 +31,7 @@
   height: 6px;
   border-radius: 3px;
   overflow: hidden;
+  
 }
 .progress__bar {
   background-color: #eee;

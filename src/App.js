@@ -36,6 +36,8 @@ class App extends Component {
 
     };
     this.getCurrentlyPlaying = this.getCurrentlyPlaying.bind(this);
+    this.tick = this.tick.bind(this);
+    this.togglePlay = this.togglePlay.bind(this);
   }
 
   componentDidMount() {
@@ -74,11 +76,15 @@ class App extends Component {
     })
       .then((res) => {
         // console.log(res)
-        this.setState({
-          item: res.data.item,
-          is_playing: res.data.is_playing,
-          progress_ms: res.data.progress_ms,
-        });
+        if (res !== undefined) {
+          
+          this.setState({
+            item: res.data.item,
+            is_playing: res.data.is_playing,
+            progress_ms: res.data.progress_ms,
+          });
+        }
+        
       })
       .catch((err) => {
         console.log(err)
@@ -86,8 +92,23 @@ class App extends Component {
   }
 
   togglePlay(e) {
+    console.log('toggling play/pause')
     e.preventDefault();
-    
+    const headers = {
+      'Authorization': 'Bearer ' + this.state.token
+    };
+    const url = this.state.is_playing ? 'https://api.spotify.com/v1/me/player/pause': "https://api.spotify.com/v1/me/player/play";
+
+    axios.put(url, null, {headers})
+      .then((res) => {
+        // console.log(res)
+        this.setState({
+          is_playing: !this.state.is_playing,
+        });
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   render() {

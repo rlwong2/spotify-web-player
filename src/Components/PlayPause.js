@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { MdPlayCircleFilled } from "react-icons/md";
 import { MdPauseCircleFilled } from "react-icons/md";
 import styled from "styled-components";
+import "./PlayPause.css";
 
-const Button = styled.button`
+const Button = styled.div`
     color: white;
+    height: 60px;
+    width: 60px;
     font-size: 2.5em;
     background-color: transparent;
     border: none;
@@ -13,21 +16,23 @@ const Button = styled.button`
     display: inline;
     margin: 0;
     padding: 0;
-    &:hover {
-        color: #333333;
+    border-radius: 30px;
+    transition: all 0.25s ease;
+    &:focus: {
+        border: none;
     }
 `
 
 const PlayPause = props => {
-    const [ is_playing, setPlay ] = useState(false);
+    // const [ playing, setPlay ] = useState(false);
     
-    useEffect(() => {
-        setPlay(props.is_playing);
-    });
+    // useEffect((props) => {
+    //     setPlay(props.is_playing);
+    // }, false);
 
     return (
         <Button onClick={(e) => props.togglePlay(e)}>
-            {!is_playing ? (<MdPlayCircleFilled />) : (<MdPauseCircleFilled />)} 
+            {!props.is_playing ? (<MdPlayCircleFilled />) : (<MdPauseCircleFilled />)} 
         </Button>
     )
 }

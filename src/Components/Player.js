@@ -1,5 +1,5 @@
 import React from "react";
-import PlayPause from "./PlayPause"
+import PlayPause from "./PlayPause";
 import "./Player.css";
 
 const Player = props => {
