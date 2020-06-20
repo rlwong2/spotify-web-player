@@ -22,25 +22,38 @@ class App extends Component {
     super();
     this.state = {
       token: null,
-    item: {
-      album: {
-        images: [{ url: "" }]
+      item: {
+        album: {
+          images: [{ url: "" }]
+        },
+        name: "",
+        artists: [{ name: "" }],
+        duration_ms:0,
       },
-      name: "",
-      artists: [{ name: "" }],
-      duration_ms:0,
-    },
-
-    is_playing: "Paused",
-    progress_ms: 0
+      is_playing: false,
+      progress_ms: 0
 
     };
     this.getCurrentlyPlaying = this.getCurrentlyPlaying.bind(this);
+    this.getRecentlyPlayed = this.getRecentlyPlayed.bind(this);
     this.tick = this.tick.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
+    this.getToken = this.getToken.bind(this);
   }
 
   componentDidMount() {
+    this.getToken();
+
+    // set interval for polling every 5 seconds
+    this.interval = setInterval(() => this.tick(), 5000);
+  }
+
+  componentWillUnmount() {
+    // clear the interval to save resources
+    clearInterval(this.interval);
+  }
+
+  getToken() {
     // Set token
     let _token = hash.access_token;
 
@@ -51,14 +64,6 @@ class App extends Component {
       });
       this.getCurrentlyPlaying(_token);
     }
-
-    // set interval for polling every 5 seconds
-    this.interval = setInterval(() => this.tick(), 5000);
-  }
-
-  componentWillUnmount() {
-    // clear the interval to save resources
-    clearInterval(this.interval);
   }
 
   tick() {
@@ -75,19 +80,43 @@ class App extends Component {
       }
     })
       .then((res) => {
-        // console.log(res)
-        if (res !== undefined) {
-          
+        if (res.data !== "") {
           this.setState({
             item: res.data.item,
             is_playing: res.data.is_playing,
             progress_ms: res.data.progress_ms,
           });
+        } else {
+          this.getRecentlyPlayed(this.state.token)
         }
         
       })
       .catch((err) => {
-        console.log(err)
+        // console.log(err)
+        this.setState({
+          token: null
+        });
+      })
+  }
+
+  getRecentlyPlayed(token) {
+    axios.get("https://api.spotify.com/v1/me/player/recently", {
+      headers: {
+        "Authorization": "Bearer " + token
+      }
+    })
+      .then((res) => {
+        // console.log(res)
+        // if (res.data !== "") {
+        //   this.setState({
+        //     item: res.data.item,
+        //     is_playing: res.data.is_playing,
+        //     progress_ms: res.data.progress_ms,
+        //   });
+        // }
+        
+      })
+      .catch((err) => {
       })
   }
 
@@ -101,7 +130,6 @@ class App extends Component {
 
     axios.put(url, null, {headers})
       .then((res) => {
-        // console.log(res)
         this.setState({
           is_playing: !this.state.is_playing,
         });

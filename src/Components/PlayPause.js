@@ -24,12 +24,6 @@ const Button = styled.div`
 `
 
 const PlayPause = props => {
-    // const [ playing, setPlay ] = useState(false);
-    
-    // useEffect((props) => {
-    //     setPlay(props.is_playing);
-    // }, false);
-
     return (
         <Button onClick={(e) => props.togglePlay(e)}>
             {!props.is_playing ? (<MdPlayCircleFilled />) : (<MdPauseCircleFilled />)} 
